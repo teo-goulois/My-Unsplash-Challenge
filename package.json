@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "json-server": "json-server --watch data/db.json --port 4000",
-    "dev": "concurrently \"next dev\" \"npm run json-server\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@types/uuid": "^8.3.4",
-    "concurrently": "^7.0.0",
-    "json-server": "^0.17.0",
-    "mongodb": "^4.4.1",
     "mongoose": "^6.2.9",
     "next": "12.1.4",
     "next-connect": "^0.12.2",
