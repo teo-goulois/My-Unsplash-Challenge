@@ -10,7 +10,7 @@ import Modal from '../components/modal/Modal'
 export interface Items {
   img: string
   title: string
-  id: string
+  _id: string
 }
 
 type AppProps = {
@@ -24,17 +24,20 @@ const Home: NextPage<AppProps> = ({ itemData }) => {
   //masonry
   const [items, setItems] = useState<Items[]>(itemData)
 
-  const search = (text: string | false) => {
-    if (text) {
-      const tempArr = itemData.filter((v) => v.title.substring(0, text.length).toUpperCase() === text.toUpperCase())
-      setItems(tempArr)
+  const search = async () => {
+    if (inputValue) {
+      const response = await fetch(`/api/itemData?search=${inputValue}`)
+      const itemData = await response.json(); 
+      setItems(itemData)
     } else {
+      const response = await fetch(`/api/itemData`)
+      const itemData = await response.json(); 
       setItems(itemData)
     }
   }
 
   useEffect(() => {
-    search(inputValue)
+    search()    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue])
 
@@ -72,11 +75,7 @@ export default Home
 
 export async function getServerSideProps(ctx: any) {
 
-	const data = await fetch('http://localhost:4000/itemData?_sort=createdAt&_order=desc', {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+	const data = await fetch(process.env.API_URL as string);
 	const itemData = await data.json();  
 
 	return {

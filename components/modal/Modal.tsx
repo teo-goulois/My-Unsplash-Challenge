@@ -37,7 +37,7 @@ const Modal =({ setOpenModal, setItems }: AppProps) => {
             const newImage = form
             
             const fetchedResponse = await fetch(`/api/itemData/`, {
-                method: "PUT",
+                method: "POST",
                 body: JSON.stringify(newImage),
                 headers: { "Content-Type": "application/json" },
             });

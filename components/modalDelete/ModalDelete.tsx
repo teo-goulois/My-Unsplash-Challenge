@@ -15,8 +15,8 @@ const ModalDelete =({ setOpenModal, setItems, id }: AppProps) => {
         setOpenModal(false)
     }
 
-    const handleDelete = async () => {      
-      const fetchedResponse = await fetch(`/api/itemData?item_id=${id}`, {
+    const handleDelete = async () => {     
+      const fetchedResponse = await fetch(`/api/itemData/${id}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
       });
